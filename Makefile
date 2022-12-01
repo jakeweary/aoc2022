@@ -1,23 +1,36 @@
 time := time -f "%E real, %U user, %S sys, %P cpu, %Mk mem"
 
 ifdef RELEASE
-rust_path := release
+haskell_flags := -v0 -O2
+haskell_path := opt/build
 rust_flags := -q --release
+rust_path := release
 zig_flags := -Drelease-fast -Dlibc -Dstrip
 else
-rust_path := debug
+haskell_flags := -v0
+haskell_path := build
 rust_flags := -q
+rust_path := debug
 endif
 
-.PHONY: all rust zig
-all: rust zig
+.PHONY: all haskell python rust zig
+all: haskell python rust zig
+
+haskell:
+	$(info --- $@ ---)
+	@cd $@; cabal build $(haskell_flags)
+	@$(time) $@/dist-newstyle/build/*/*/*/x/aoc/$(haskell_path)/aoc/aoc
+
+python:
+	$(info --- $@ ---)
+	@$(time) python3 -B $@/aoc.py
 
 rust:
 	$(info --- $@ ---)
 	@cd $@; cargo build $(rust_flags)
-	@$(time) ./$@/target/$(rust_path)/aoc
+	@$(time) $@/target/$(rust_path)/aoc
 
 zig:
 	$(info --- $@ ---)
 	@cd $@; zig build $(zig_flags)
-	@$(time) ./$@/zig-out/bin/aoc
+	@$(time) $@/zig-out/bin/aoc

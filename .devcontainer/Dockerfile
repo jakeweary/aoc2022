@@ -1,11 +1,19 @@
-FROM alpine
+FROM ubuntu
 
-# essentials
-RUN apk add build-base
-RUN apk add git curl jq
-RUN apk add mandoc man-pages
-RUN apk add bash bash-completion
-RUN sed -i s/ash/bash/ /etc/passwd
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt update
+RUN apt install -y build-essential
+RUN apt install -y curl git jq time
+
+# haskell
+ARG BOOTSTRAP_HASKELL_NONINTERACTIVE=1
+ARG BOOTSTRAP_HASKELL_MINIMAL=1
+ARG BOOTSTRAP_HASKELL_ADJUST_BASHRC=1
+RUN curl -sSf https://get-ghcup.haskell.org | bash
+RUN ~/.ghcup/bin/ghcup install ghc 9.4.2 --set
+RUN ~/.ghcup/bin/ghcup install hls 1.8.0.0 --set
+RUN ~/.ghcup/bin/ghcup install cabal 3.6.2.0 --set
+RUN apt install -y libgmp-dev
 
 # rust
 RUN curl -sSf https://sh.rustup.rs | sh -s -- \
@@ -23,3 +31,6 @@ RUN json=$(curl -fsSL https://ziglang.org/download/index.json) && \
 RUN curl -fLO https://zig.pm/zls/downloads/$(uname -m)-linux/bin/zls && \
   chmod +x zls && \
   mv zls /usr/local/bin
+
+# python3
+RUN apt install -y python3

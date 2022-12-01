@@ -1,7 +1,7 @@
 pub fn solve() {
   let input = std::fs::read_to_string(".input/day01").unwrap();
 
-  let mut inventories = input
+  let mut totals = input
     .split("\n\n")
     .map(|items| {
       items
@@ -12,11 +12,11 @@ pub fn solve() {
     .collect::<Option<Vec<_>>>()
     .unwrap();
 
-  inventories.sort_unstable();
-  inventories.reverse();
+  totals.sort_unstable();
+  totals.reverse();
 
-  let part1 = inventories[0];
-  let part2 = inventories[0..3].iter().sum::<u32>();
+  let part1 = totals[0];
+  let part2 = totals[0..3].iter().sum::<u32>();
 
   println!("day01: {} {}", part1, part2);
 }

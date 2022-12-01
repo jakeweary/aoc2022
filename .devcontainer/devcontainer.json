@@ -7,9 +7,11 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "haskell.haskell",
+        "ms-python.python",
+        "rust-lang.rust-analyzer",
         "tiehuis.zig",
-        "AugusteRame.zls-vscode",
-        "rust-lang.rust-analyzer"
+        "AugusteRame.zls-vscode"
       ]
     }
   }
