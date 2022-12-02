@@ -1,6 +1,4 @@
-pub fn solve() {
-  let input = std::fs::read_to_string(".input/day01").unwrap();
-
+pub fn solve(input: &str) -> [u32; 2] {
   let mut totals = input
     .split("\n\n")
     .map(|items| {
@@ -18,5 +16,5 @@ pub fn solve() {
   let part1 = totals[0];
   let part2 = totals[0..3].iter().sum::<u32>();
 
-  println!("day01: {} {}", part1, part2);
+  [part1, part2]
 }
