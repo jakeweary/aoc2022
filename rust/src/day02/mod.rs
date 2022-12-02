@@ -1,12 +1,3 @@
-fn score(me: u8, enemy: u8) -> u32 {
-  1 + me as u32 + match (3 + enemy - me) % 3 {
-    0 => 3,
-    1 => 0,
-    2 => 6,
-    _ => panic!()
-  }
-}
-
 pub fn solve() {
   let input = std::fs::read_to_string(".input/day02").unwrap();
 
@@ -14,11 +5,11 @@ pub fn solve() {
   let mut part2 = 0;
 
   for line in input.lines() {
-    let &[lhs, _, rhs] = line.as_bytes() else { panic!() };
-    let lhs = lhs - b'A';
-    let rhs = rhs - b'X';
-    part1 += score(rhs, lhs);
-    part2 += score((rhs + lhs + 2) % 3, lhs);
+    let [a, _, b] = line.as_bytes() else { panic!() };
+    let a = a - b'A';
+    let b = b - b'X';
+    part1 += (1 + b + (4 + b - a) % 3 * 3) as u32;
+    part2 += (1 + (2 + b + a) % 3 + b * 3) as u32;
   }
 
   println!("day02: {} {}", part1, part2);
