@@ -4,11 +4,12 @@ pub fn build(b: *std.build.Builder) void {
   const target = b.standardTargetOptions(.{});
   const mode = b.standardReleaseOptions();
   const libc = b.option(bool, "libc", "Link libc");
-  const strip = b.option(bool, "strip", "Strip executable");
+  const strip = b.option(bool, "strip", "Strip");
 
   const exe = b.addExecutable("aoc", "src/main.zig");
   if (libc == true) exe.linkLibC();
   exe.strip = strip;
+  exe.single_threaded = true;
   exe.setTarget(target);
   exe.setBuildMode(mode);
   exe.install();
