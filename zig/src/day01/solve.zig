@@ -1,15 +1,13 @@
+const aoc = @import("root");
 const std = @import("std");
 
-pub fn solve(alc: std.mem.Allocator, stdout: std.fs.File.Writer) !void {
-  const input = try std.fs.cwd().readFileAlloc(alc, ".input/day01", std.math.maxInt(usize));
-  defer alc.free(input);
-
-  var totals = std.ArrayList(u32).init(alc);
+pub fn solve(ctx: aoc.Context) ![2]u32 {
+  var totals = std.ArrayList(u32).init(ctx.allocator);
   defer totals.deinit();
 
   try totals.append(0);
 
-  const trimmed = std.mem.trimRight(u8, input, &std.ascii.whitespace);
+  const trimmed = std.mem.trimRight(u8, ctx.input, &std.ascii.whitespace);
   var lines = std.mem.split(u8, trimmed, "\n");
   while (lines.next()) |line| {
     switch (line.len) {
@@ -26,5 +24,5 @@ pub fn solve(alc: std.mem.Allocator, stdout: std.fs.File.Writer) !void {
   const part1 = totals.items[0];
   const part2 = @reduce(.Add, @as(@Vector(3, u32), totals.items[0..3].*));
 
-  try stdout.print("day01: {} {}\n", .{ part1, part2 });
+  return .{ part1, part2 };
 }

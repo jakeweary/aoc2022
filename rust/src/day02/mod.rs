@@ -8,8 +8,8 @@ pub fn solve() {
     let [a, _, b] = line.as_bytes() else { panic!() };
     let a = a - b'A';
     let b = b - b'X';
-    part1 += (1 + b + (4 + b - a) % 3 * 3) as u32;
-    part2 += (1 + (2 + b + a) % 3 + b * 3) as u32;
+    part1 += ((4 + b - a) % 3 * 3 + b + 1) as u32;
+    part2 += ((2 + b + a) % 3 + 3 * b + 1) as u32;
   }
 
   println!("day02: {} {}", part1, part2);

@@ -1,11 +1,31 @@
 const builtin = @import("builtin");
 const std = @import("std");
+const days = struct {
+  const day01 = @import("day01/solve.zig");
+  const day02 = @import("day02/solve.zig");
+};
+
+pub const Context = struct {
+  allocator: std.mem.Allocator,
+  stdout: std.fs.File.Writer,
+  input: []const u8,
+};
 
 fn solve(alc: std.mem.Allocator) !void {
   const stdout = std.io.getStdOut().writer();
 
-  try @import("day01/solve.zig").solve(alc, stdout);
-  try @import("day02/solve.zig").solve(alc, stdout);
+  inline for (@typeInfo(days).Struct.decls) |day| {
+    const path = ".input/" ++ day.name;
+    const input = try std.fs.cwd().readFileAlloc(alc, path, std.math.maxInt(usize));
+    defer alc.free(input);
+
+    var timer = try std.time.Timer.start();
+    const ctx = .{ .allocator = alc, .stdout = stdout, .input = input };
+    const answers = try @field(days, day.name).solve(ctx);
+    const time = std.fmt.fmtDuration(timer.read());
+
+    try stdout.print("{s}: {} {} ({})\n", .{ day.name, answers[0], answers[1], time });
+  }
 }
 
 pub fn main() !void {
