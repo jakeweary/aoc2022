@@ -14,7 +14,7 @@ const LUT = blk: {
   break :blk arr;
 };
 
-pub fn solve(alc: std.mem.Allocator) !void {
+pub fn solve(alc: std.mem.Allocator, stdout: std.fs.File.Writer) !void {
   const input = try std.fs.cwd().readFileAlloc(alc, ".input/day02", std.math.maxInt(usize));
   defer alc.free(input);
 
@@ -28,5 +28,5 @@ pub fn solve(alc: std.mem.Allocator) !void {
     part2 += values[1];
   }
 
-  std.debug.print("day02: {} {}\n", .{ part1, part2 });
+  try stdout.print("day02: {} {}\n", .{ part1, part2 });
 }

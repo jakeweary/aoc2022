@@ -1,6 +1,6 @@
 const std = @import("std");
 
-pub fn solve(alc: std.mem.Allocator) !void {
+pub fn solve(alc: std.mem.Allocator, stdout: std.fs.File.Writer) !void {
   const input = try std.fs.cwd().readFileAlloc(alc, ".input/day01", std.math.maxInt(usize));
   defer alc.free(input);
 
@@ -26,5 +26,5 @@ pub fn solve(alc: std.mem.Allocator) !void {
   const part1 = totals.items[0];
   const part2 = @reduce(.Add, @as(@Vector(3, u32), totals.items[0..3].*));
 
-  std.debug.print("day01: {} {}\n", .{ part1, part2 });
+  try stdout.print("day01: {} {}\n", .{ part1, part2 });
 }

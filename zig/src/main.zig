@@ -2,8 +2,10 @@ const builtin = @import("builtin");
 const std = @import("std");
 
 fn solve(alc: std.mem.Allocator) !void {
-  try @import("day01/solve.zig").solve(alc);
-  try @import("day02/solve.zig").solve(alc);
+  const stdout = std.io.getStdOut().writer();
+
+  try @import("day01/solve.zig").solve(alc, stdout);
+  try @import("day02/solve.zig").solve(alc, stdout);
 }
 
 pub fn main() !void {
