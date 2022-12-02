@@ -1,10 +1,10 @@
 const std = @import("std");
 
-pub fn solve(allocator: std.mem.Allocator) !void {
-  const input = try std.fs.cwd().readFileAlloc(allocator, ".input/day01", std.math.maxInt(usize));
-  defer allocator.free(input);
+pub fn solve(alc: std.mem.Allocator) !void {
+  const input = try std.fs.cwd().readFileAlloc(alc, ".input/day01", std.math.maxInt(usize));
+  defer alc.free(input);
 
-  var totals = std.ArrayList(u32).init(allocator);
+  var totals = std.ArrayList(u32).init(alc);
   defer totals.deinit();
 
   try totals.append(0);
