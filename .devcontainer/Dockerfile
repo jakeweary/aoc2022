@@ -10,14 +10,14 @@ ARG BOOTSTRAP_HASKELL_NONINTERACTIVE=1
 ARG BOOTSTRAP_HASKELL_MINIMAL=1
 ARG BOOTSTRAP_HASKELL_ADJUST_BASHRC=1
 RUN curl -sSf https://get-ghcup.haskell.org | bash
-RUN ~/.ghcup/bin/ghcup install ghc 9.4.2 --set
+RUN ~/.ghcup/bin/ghcup install ghc 9.2.4 --set
 RUN ~/.ghcup/bin/ghcup install hls 1.8.0.0 --set
 RUN ~/.ghcup/bin/ghcup install cabal 3.6.2.0 --set
 RUN apt install -y libgmp-dev
 
 # rust
-RUN curl -sSf https://sh.rustup.rs | sh -s -- \
-  -y --default-toolchain nightly --profile minimal
+RUN curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
+RUN ~/.cargo/bin/rustup toolchain install nightly --profile minimal
 
 # zig: compiler
 RUN json=$(curl -fsSL https://ziglang.org/download/index.json) && \
