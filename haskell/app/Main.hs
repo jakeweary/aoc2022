@@ -1,7 +1,14 @@
 module Main where
 
-import qualified Day01
+import Day03 qualified
+import Text.Printf (printf)
+
+solve :: (String -> IO (Int, Int)) -> String -> IO ()
+solve fn name = do
+  input <- readFile $ ".input/" ++ name
+  output <- fn input
+  uncurry (printf "%s: %d %d\n" name) output
 
 main :: IO ()
 main = do
-  Day01.solve
+  solve Day03.solve "day03"
