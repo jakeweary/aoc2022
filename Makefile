@@ -13,8 +13,12 @@ rust_flags := -q
 rust_path := debug
 endif
 
-.PHONY: all haskell python rust zig
-all: haskell python rust zig
+.PHONY: all bqn haskell python rust zig
+all: bqn haskell python rust zig
+
+bqn:
+	$(info --- $@ ---)
+	@$(time) bqn $@/aoc.bqn
 
 haskell:
 	$(info --- $@ ---)

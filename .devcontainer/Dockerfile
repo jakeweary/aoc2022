@@ -32,5 +32,15 @@ RUN curl -fLO https://zig.pm/zls/downloads/$(uname -m)-linux/bin/zls && \
   chmod +x zls && \
   mv zls /usr/local/bin
 
-# python3
+# python
 RUN apt install -y python3
+
+# bqn
+RUN git clone --depth 1 https://github.com/dzaima/CBQN.git /tmp/bqn && \
+  cd /tmp/bqn && CC=cc FFI=0 REPLXX=1 make o3n && mv BQN /usr/local/bin && \
+  cd /tmp && rm -rf bqn
+
+# k
+RUN git clone --depth 1 https://codeberg.org/ngn/k.git /tmp/k && \
+  cd /tmp/k && CC=cc make k && mv k /usr/local/bin && \
+  cd /tmp && rm -rf k
