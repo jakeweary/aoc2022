@@ -3,6 +3,7 @@ const std = @import("std");
 const days = struct {
   const day01 = @import("day01/solve.zig");
   const day02 = @import("day02/solve.zig");
+  const day03 = @import("day03/solve.zig");
 };
 
 pub const Context = struct {
