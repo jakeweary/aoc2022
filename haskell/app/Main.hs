@@ -1,14 +1,15 @@
-module Main where
+module Main (main) where
 
-import Day03 qualified
+import Data.Text.IO qualified as T
 import Text.Printf (printf)
 
-solve :: (String -> IO (Int, Int)) -> String -> IO ()
-solve fn name = do
-  input <- readFile $ ".input/" ++ name
-  output <- fn input
-  uncurry (printf "%s: %d %d\n" name) output
+import Day03 qualified
 
 main :: IO ()
 main = do
-  solve Day03.solve "day03"
+  day Day03.solve "day03"
+  where
+    day solve name = do
+      input <- T.readFile $! ".input/" ++ name
+      output <- solve input
+      uncurry (printf "%s: %d %d\n" name) output

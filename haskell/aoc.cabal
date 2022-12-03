@@ -9,6 +9,6 @@ common common
 executable aoc
   import: common
   main-is: Main.hs
-  build-depends: base, containers, split
   hs-source-dirs: app
+  build-depends: base, containers, split, text
   other-modules: Day03
