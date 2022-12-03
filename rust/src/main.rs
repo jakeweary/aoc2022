@@ -1,3 +1,4 @@
+#![feature(iter_array_chunks)]
 #![feature(portable_simd)]
 
 macro_rules! aoc(($($day:ident)+) => {
@@ -20,4 +21,5 @@ macro_rules! aoc(($($day:ident)+) => {
 aoc! {
   day01
   day02
+  day03
 }
