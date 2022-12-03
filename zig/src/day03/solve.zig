@@ -1,23 +1,17 @@
 const aoc = @import("root");
 const std = @import("std");
 
-const PRIORITY = blk: {
-  var table: [0x100]u6 = undefined;
-  for (table) |*ptr, item| {
-    ptr.* = switch (item) {
-      'a'...'z' => item - 'a',
-      'A'...'Z' => item - 'A' + 26,
-      else => 0,
-    };
-  }
-  break :blk table;
-};
+fn priority(item: u8) u8 {
+  const mod = 'z' - 'A' + 1;
+  const shift = 'a' % mod;
+  return (item - shift) % mod;
+}
 
 fn bitset(items: []const u8) u52 {
-  var acc: u52 = 0;
+  var bits: u52 = 0;
   for (items) |item|
-    acc |= @as(u52, 1) << PRIORITY[item];
-  return acc;
+    bits |= @as(u52, 1) << @truncate(u6, priority(item));
+  return bits;
 }
 
 fn commonBit(comptime N: usize, bitsets: @Vector(N, u52)) u6 {
