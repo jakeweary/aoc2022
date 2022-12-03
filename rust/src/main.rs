@@ -1,3 +1,5 @@
+#![feature(portable_simd)]
+
 macro_rules! aoc(($($day:ident)+) => {
   $(mod $day;)+
 
