@@ -4,6 +4,7 @@
   "name": "Sandbox",
   "dockerFile": "Dockerfile",
   "context": ".",
+  "postCreateCommand": "make configure",
   "customizations": {
     "vscode": {
       "extensions": [

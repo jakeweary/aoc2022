@@ -13,8 +13,13 @@ rust_flags := -q
 rust_path := debug
 endif
 
-.PHONY: all bqn haskell python rust zig
+.PHONY: bqn haskell python rust zig all configure
 all: bqn haskell python rust zig
+
+configure:
+	@cd haskell; cabal update
+
+# ---
 
 bqn:
 	$(info --- $@ ---)

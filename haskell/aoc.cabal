@@ -5,10 +5,11 @@ version: 0.1.0.0
 common common
   ghc-options: -Wall
   default-language: GHC2021
+  default-extensions: OverloadedStrings
 
 executable aoc
   import: common
   main-is: Main.hs
   hs-source-dirs: app
   build-depends: base, containers, split, text
-  other-modules: Day03
+  other-modules: Day03, Day04
