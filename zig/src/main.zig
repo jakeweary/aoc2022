@@ -12,7 +12,19 @@ pub const Context = struct {
   input: []const u8,
 };
 
-fn solve(alc: std.mem.Allocator) !void {
+pub fn main() !void {
+  if (builtin.mode == .Debug or builtin.link_libc == false) {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+
+    try solveAllDays(gpa.allocator());
+  }
+  else {
+    try solveAllDays(std.heap.c_allocator);
+  }
+}
+
+fn solveAllDays(alc: std.mem.Allocator) !void {
   const stdout = std.io.getStdOut().writer();
 
   inline for (@typeInfo(days).Struct.decls) |day| {
@@ -25,19 +37,20 @@ fn solve(alc: std.mem.Allocator) !void {
     const answers = try @field(days, day.name).solve(ctx);
     const time = std.fmt.fmtDuration(timer.read());
 
-    try stdout.print("{s}: {} {} ({})\n", .{ day.name, answers[0], answers[1], time });
+    try stdout.print("{s}: ", .{ day.name });
+    try printAndFree(ctx, answers[0]);
+    try printAndFree(ctx, answers[1]);
+    try stdout.print("({})\n", .{ time });
   }
 }
 
-pub fn main() !void {
-  if (builtin.mode == .Debug or builtin.link_libc == false) {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
-
-    try solve(gpa.allocator());
-  }
-  else {
-    try solve(std.heap.c_allocator);
+fn printAndFree(ctx: Context, answer: anytype) !void {
+  switch (@typeInfo(@TypeOf(answer))) {
+    .Pointer => {
+      try ctx.stdout.print("{s} ", .{ answer });
+      ctx.allocator.free(answer);
+    },
+    else => try ctx.stdout.print("{any} ", .{ answer }),
   }
 }
 

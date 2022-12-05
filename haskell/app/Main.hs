@@ -14,4 +14,4 @@ main = do
     day solve name = do
       input <- T.readFile $ ".input/" ++ name
       output <- solve input
-      uncurry (printf "%s: %d %d\n" name) output
+      uncurry (printf "%s: %v %v\n" name) output
