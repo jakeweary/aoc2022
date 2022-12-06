@@ -30,10 +30,6 @@ haskell:
 	@cd $@; cabal build $(haskell_flags)
 	@$(time) $@/dist-newstyle/build/*/*/*/x/aoc/$(haskell_path)/aoc/aoc
 
-python:
-	$(info --- $@ ---)
-	@$(time) python3 -B $@/aoc.py
-
 rust:
 	$(info --- $@ ---)
 	@cd $@; cargo build $(rust_flags)
