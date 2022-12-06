@@ -12,4 +12,4 @@ executable aoc
   main-is: Main.hs
   hs-source-dirs: app
   build-depends: base, array, containers, text, split
-  other-modules: Day03, Day04, Day05
+  other-modules: Day03, Day04, Day05, Day06
