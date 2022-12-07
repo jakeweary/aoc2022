@@ -1,10 +1,11 @@
 Run ← {
   day ← •Import 𝕩∾".bqn"
-  p1‿p2 ← •Fmt¨ day.Solve "../.input/"∾𝕩
-  •Out ∾𝕩‿": "‿p1‿" "‿p2
+  a‿b ← •Repr¨ day.Solve ∾•wdpath‿"/.input/"‿𝕩
+  •Out ∾𝕩‿": "‿a‿" "‿b
 }
 
 Run¨ ⟨
   "day01"
   "day02"
+  "day06"
 ⟩
