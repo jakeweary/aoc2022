@@ -1,7 +1,9 @@
-input ← •FLines "../.input/day01"
+Solve ⇐ {
+  input ← •FLines 𝕩
+  input {𝕩⊔˜(⊢-˜+`×¬)0=≠¨𝕩}↩ # split on empty
+  input {{𝕨+𝕩×10}´⌽𝕩-'0'}¨¨↩ # parse numbers
 
-blocks ← {𝕩⊔˜(⊢-˜+`×¬)0=≠¨𝕩} input # split on empty
-blocks ↩ {{𝕨+𝕩×10}´⌽𝕩-'0'}¨¨ blocks # parse numbers
-totals ← ∨+´¨blocks
+  totals ← ∨+´¨input
 
-•Out "day01: " ∾ •Fmt ⟨⊑totals, +´3↑totals⟩
+  ⟨ ⊑totals, +´3↑totals ⟩
+}
