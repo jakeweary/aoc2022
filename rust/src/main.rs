@@ -1,3 +1,4 @@
+#![deny(rust_2018_idioms)]
 #![feature(iter_array_chunks)]
 #![feature(portable_simd)]
 
@@ -27,4 +28,5 @@ aoc! {
   day02
   day03
   day04
+  day07
 }
