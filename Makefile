@@ -23,7 +23,7 @@ configure:
 
 bqn:
 	$(info --- $@ ---)
-	@$(time) cbqn $@/aoc.bqn
+	@$(time) cbqn $@/main.bqn
 
 haskell:
 	$(info --- $@ ---)

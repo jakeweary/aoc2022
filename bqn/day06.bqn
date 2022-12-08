@@ -5,7 +5,7 @@ FindMarker ← {
 }
 
 Solve ⇐ {
-  input ← ⊑ •FLines 𝕩
+  input ← ⊑𝕩
   ⟨ input FindMarker 4
     input FindMarker 14 ⟩
 }

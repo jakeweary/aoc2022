@@ -4,4 +4,4 @@ Score ← {
     (1+3|2+b+a) + (3×b) ⟩
 }
 
-Solve ⇐ {+´Score¨ •FLines 𝕩}
+Solve ⇐ {+´Score¨ 𝕩}
