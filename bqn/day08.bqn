@@ -3,17 +3,19 @@ Solve ⇐ {
   rows ← trees
   cols ← ⍉trees
 
-  Map ← {
-    height‿y‿x ← 𝕩
+  SplitAt ← {⟨⌽𝕩↑𝕨, 1↓𝕩↓𝕨⟩}
+  IsVisible ← {𝕩>⌊´⌈´¨𝕨}
+  ScenicScore ← {×´{(≠𝕩)⌊1+⊑𝕩⊐1}¨𝕩≤𝕨}
+
+  Enumerate ← {𝕩∾¨↕≢𝕩}
+  Fold ← {a‿x𝕊b‿y: ⟨a+b, x⌈y⟩}
+  Map ← {𝕊height‿y‿x:
     row‿col ← ⟨y⊏rows, x⊏cols⟩
-    l‿r ← ⟨⌽x↑row, 1↓x↓row⟩ # left right
-    u‿d ← ⟨⌽y↑col, 1↓y↓col⟩ # up down
-    is_visible ← height > ⌊´⌈´¨l‿r‿u‿d
-    scenic_score ← ×´{(≠𝕩)⌊1+⊑𝕩⊐1}¨ height ≤ l‿r‿u‿d
-    is_visible‿scenic_score
+    l‿r ← row SplitAt x # left right
+    u‿d ← col SplitAt y # up down
+    ⟨ l‿r‿u‿d IsVisible height
+      l‿r‿u‿d ScenicScore height ⟩
   }
 
-  Reduce ← {a‿x←𝕨, b‿y←𝕩, ⟨a+b, x⌈y⟩}
-
-  Reduce´Map¨⥊{𝕩∾¨↕≢𝕩} trees
+  Fold´Map¨⥊Enumerate trees
 }
