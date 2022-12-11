@@ -29,4 +29,5 @@ aoc! {
   day03
   day04
   day07
+  day11
 }
