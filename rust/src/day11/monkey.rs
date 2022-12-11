@@ -1,17 +1,17 @@
-#[derive(Debug)]
-pub enum Op {
+#[derive(Debug, Clone, Copy)]
+pub enum Op<T> {
   Square,
-  Mul(u32),
-  Add(u32),
+  Mul(T),
+  Add(T),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Monkey {
-  pub items: Vec<u32>,
-  pub op: Op,
-  pub test: u32,
+  pub items: Vec<u64>,
+  pub op: Op<u64>,
+  pub test: u64,
   pub throw: [usize; 2],
-  pub inspected: u32,
+  pub inspected: u64,
 }
 
 impl Monkey {
