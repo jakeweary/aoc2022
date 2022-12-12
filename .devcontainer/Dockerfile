@@ -32,16 +32,21 @@ RUN json=$(curl -fsSL https://ziglang.org/download/index.json) && \
   curl -fLO $(printf %s "$json" | jq -r '.master["'$(uname -m)'-linux"].tarball') && \
   tar -xf *.tar.xz && rm *.tar.xz && \
   mv zig-linux-* /usr/local/bin/zig.d && \
-  ln -sfn /usr/local/bin/zig.d/zig /usr/local/bin/zig
+  ln -sfn zig.d/zig /usr/local/bin/zig
 
 # bqn
 RUN git clone --depth 1 https://github.com/dzaima/CBQN.git && \
-  cd CBQN && make o3n CC=cc FFI=0 REPLXX=1 && mv BQN /usr/local/bin/cbqn && \
+  cd CBQN && \
+  make o3n-singeli CC=cc FFI=0 REPLXX=1 && \
+  mv BQN /usr/local/bin/cbqn && \
+  ln -sfn cbqn /usr/local/bin/bqn && \
   cd .. && rm -rf bqn
 
 # ngn/k
 RUN git clone --depth 1 https://codeberg.org/ngn/k.git && \
-  cd k && make k CC=cc && mv k /usr/local/bin && \
+  cd k && \
+  make k CC=cc && \
+  mv k /usr/local/bin && \
   cd .. && rm -rf k
 
 # futhark
