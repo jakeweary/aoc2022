@@ -4,6 +4,7 @@ const days = struct {
   const day01 = @import("day01/solve.zig");
   const day02 = @import("day02/solve.zig");
   const day03 = @import("day03/solve.zig");
+  const day12 = @import("day12/solve.zig");
 };
 
 pub const Context = struct {
