@@ -1,4 +1,5 @@
 #![deny(rust_2018_idioms)]
+#![feature(array_windows)]
 #![feature(iter_array_chunks)]
 #![feature(portable_simd)]
 
@@ -30,4 +31,5 @@ aoc! {
   day04
   day07
   day11
+  day14
 }
