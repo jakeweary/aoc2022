@@ -1,6 +1,7 @@
 #![deny(rust_2018_idioms)]
 #![feature(array_windows)]
 #![feature(iter_array_chunks)]
+#![feature(iter_collect_into)]
 #![feature(portable_simd)]
 
 mod normalize;
@@ -32,4 +33,5 @@ aoc! {
   day07
   day11
   day14
+  day15
 }
