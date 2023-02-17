@@ -5,7 +5,7 @@ haskell_flags := -v0 -O2
 haskell_path := opt/build
 rust_flags := -q --release
 rust_path := release
-zig_flags := -Drelease-fast -Dlibc -Dstrip
+zig_flags := -Doptimize=ReleaseFast -Dlibc -Dstrip
 else
 haskell_flags := -v0
 haskell_path := build

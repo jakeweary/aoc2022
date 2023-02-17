@@ -5,7 +5,6 @@
 #![feature(portable_simd)]
 
 mod normalize;
-
 use normalize::*;
 
 macro_rules! aoc(($($day:ident)+) => {
